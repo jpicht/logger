@@ -8,7 +8,7 @@ import (
 )
 
 func allLevels(l *logger.Logger) {
-	l.Trace("test")
+	l.Tracef("test: %T", *l)
 	l.Debug("test")
 	l.Info("test")
 	l.Notice("test")
@@ -20,6 +20,7 @@ func allLevels(l *logger.Logger) {
 }
 
 func main() {
+	var w logger.Writer
 	fmt.Println("Severity levels:")
 	for i := 0; i <= int(logger.TRACE); i++ {
 		fmt.Printf("  %d: %s\n", i, logger.Severity(i).String())
@@ -27,7 +28,7 @@ func main() {
 	fmt.Println()
 
 	fmt.Println("Writer with empty message:")
-	w := logger.NewFileWriter(os.Stdout)
+	w = logger.NewFileWriter(os.Stdout)
 	w.Write(logger.Message{})
 	fmt.Println()
 
@@ -37,7 +38,18 @@ func main() {
 	fmt.Println()
 
 	fmt.Println("Logger with level filter:")
-	l.AddFilter(logger.NewSeverityFilter(logger.ERROR))
+	wf := logger.NewSeverityFilter(logger.ERROR, w)
+	l = logger.NewLogger(wf)
+	allLevels(l)
+	fmt.Println()
+
+	fmt.Println("Logger with prefix:")
+	l = logger.NewLogger(w).WithPrefix("--PREFIX-- ")
+	allLevels(l)
+	fmt.Println()
+
+	fmt.Println("Logger with data:")
+	l = logger.NewLogger(w).WithData("foo", "bar")
 	allLevels(l)
 	fmt.Println()
 }
