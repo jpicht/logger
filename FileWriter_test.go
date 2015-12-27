@@ -33,7 +33,7 @@ func TestFileWriter(t *testing.T) {
 		mw := NewMockWriter()
 		se := NewStringEncoder()
 		se.Format = "%M"
-		fw := NewFileWriter(mw, se, Seperators.Empty)
+		fw := NewFileWriter(mw, se, Separators.Empty)
 		fw.Write(Message{Message: str})
 		if string(mw.Get()) != str {
 			t.Fatalf("Wrong output: '%s' expected '%s'", mw.Get(), str)

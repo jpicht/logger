@@ -10,13 +10,13 @@ type FileWriter struct {
 	separator []byte
 }
 
-type seperators struct {
+type separators struct {
 	Empty   []byte
 	NewLine []byte
 }
 
 var (
-	Seperators = seperators{
+	Separators = separators{
 		Empty:   make([]byte, 0),
 		NewLine: []byte("\n"),
 	}
