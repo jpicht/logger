@@ -5,10 +5,8 @@ type MultiWriter struct {
 }
 
 func NewMultiWriter(w ...Writer) *MultiWriter {
-	writers := make([]Writer, 0)
-	writers = append(writers, w...)
 	return &MultiWriter{
-		writers: writers,
+		writers: w,
 	}
 }
 
