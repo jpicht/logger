@@ -28,12 +28,18 @@ func main() {
 	fmt.Println()
 
 	fmt.Println("Writer with empty message:")
-	w = logger.NewFileWriter(os.Stdout)
+	w = logger.NewFileWriter(os.Stdout, logger.NewStringEncoder(), logger.Seperators.NewLine)
 	w.Write(logger.Message{})
 	fmt.Println()
 
 	fmt.Println("Logger:")
 	l := logger.NewLogger(w)
+	allLevels(l)
+	fmt.Println()
+
+	fmt.Println("Logger with multiwriter:")
+	mw := logger.NewMultiWriter(w, w)
+	l = logger.NewLogger(mw)
 	allLevels(l)
 	fmt.Println()
 
@@ -50,6 +56,12 @@ func main() {
 
 	fmt.Println("Logger with data:")
 	l = logger.NewLogger(w).WithData("foo", "bar")
+	allLevels(l)
+	fmt.Println()
+
+	fmt.Println("JsonWriter:")
+	jw := logger.NewFileWriter(os.Stdout, logger.NewJsonEncoder(), logger.Seperators.NewLine)
+	l = logger.NewLogger(jw).WithData("foo", "bar").WithData("bar", 0xdeadbeef)
 	allLevels(l)
 	fmt.Println()
 }
