@@ -24,6 +24,14 @@ func FromContext(c ctx.Context) (*Logger, error) {
 	return nil, NoLoggerInContext
 }
 
+func MayFromContext(c ctx.Context) *Logger {
+	l, err := FromContext(c)
+	if nil != err {
+		return Fake()
+	}
+	return l
+}
+
 func MustFromContext(c ctx.Context) *Logger {
 	l, err := FromContext(c)
 	if nil != err {
