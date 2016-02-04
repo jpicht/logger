@@ -20,8 +20,8 @@ var (
 )
 
 le = logger.NewStringEncoder()
-lw = logger.NewFileWriter(os.Stdout, logger.NewStringEncoder(), logger.Seperators.NewLine)
-l = logger.NewLogger(w)
+lw = logger.NewFileWriter(os.Stdout, logger.NewStringEncoder(), logger.Separators.NewLine)
+l = logger.NewLogger(lw)
 ```
 
 ### Context
