@@ -7,8 +7,8 @@ import (
 	"os"
 )
 
-func allLevels(l *logger.Logger) {
-	l.Tracef("test: %T", *l)
+func allLevels(l logger.Logger) {
+	l.Tracef("test: %T", l)
 	l.Debug("test")
 	l.Info("test")
 	l.Notice("test")
@@ -28,7 +28,7 @@ func main() {
 	fmt.Println()
 
 	fmt.Println("Writer with empty message:")
-	w = logger.NewFileWriter(os.Stdout, logger.NewStringEncoder(), logger.Seperators.NewLine)
+	w = logger.NewFileWriter(os.Stdout, logger.NewStringEncoder(), logger.Separators.NewLine)
 	w.Write(logger.Message{})
 	fmt.Println()
 
@@ -60,7 +60,7 @@ func main() {
 	fmt.Println()
 
 	fmt.Println("JsonWriter:")
-	jw := logger.NewFileWriter(os.Stdout, logger.NewJsonEncoder(), logger.Seperators.NewLine)
+	jw := logger.NewFileWriter(os.Stdout, logger.NewJsonEncoder(), logger.Separators.NewLine)
 	l = logger.NewLogger(jw).WithData("foo", "bar").WithData("bar", 0xdeadbeef)
 	allLevels(l)
 	fmt.Println()

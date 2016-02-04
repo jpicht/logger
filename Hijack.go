@@ -8,7 +8,7 @@ import (
 type SeverityFn func(s string, fallback Severity) Severity
 
 type Hijack struct {
-	logger           *Logger
+	logger           Logger
 	fallbackSeverity Severity
 	severityFn       SeverityFn
 }
@@ -29,7 +29,7 @@ func DefaultSeverityFn(s string, fallback Severity) Severity {
 	return fallback
 }
 
-func NewHijack(l *Logger, s Severity) *Hijack {
+func NewHijack(l Logger, s Severity) *Hijack {
 	return &Hijack{
 		logger:           l,
 		fallbackSeverity: s,

@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func NewStringLogger(o io.Writer) *Logger {
+func NewStringLogger(o io.Writer) Logger {
 	return NewLogger(
 		NewFileWriter(
 			o,
@@ -15,10 +15,10 @@ func NewStringLogger(o io.Writer) *Logger {
 	)
 }
 
-func NewStdoutLogger() *Logger {
+func NewStdoutLogger() Logger {
 	return NewStringLogger(os.Stdout)
 }
 
-func NewStderrLogger() *Logger {
+func NewStderrLogger() Logger {
 	return NewStringLogger(os.Stderr)
 }

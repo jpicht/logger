@@ -1,6 +1,6 @@
 package logger
 
-func Fake() *Logger {
+func Fake() Logger {
 	return NewLogger(&nullwriter{})
 }
 

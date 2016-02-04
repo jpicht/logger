@@ -12,19 +12,19 @@ const loggerKey = loggerCtxKey("logger")
 
 var NoLoggerInContext = errors.New("Context does not provide a logger instance")
 
-func (l *Logger) Context(p ctx.Context) ctx.Context {
+func (l *loggerimpl) Context(p ctx.Context) ctx.Context {
 	return ctx.WithValue(p, loggerKey, l)
 }
 
-func FromContext(c ctx.Context) (*Logger, error) {
+func FromContext(c ctx.Context) (Logger, error) {
 	l_i := c.Value(loggerKey)
-	if l, ok := l_i.(*Logger); ok {
+	if l, ok := l_i.(Logger); ok {
 		return l, nil
 	}
 	return nil, NoLoggerInContext
 }
 
-func MayFromContext(c ctx.Context) *Logger {
+func MayFromContext(c ctx.Context) Logger {
 	l, err := FromContext(c)
 	if nil != err {
 		return Fake()
@@ -32,7 +32,7 @@ func MayFromContext(c ctx.Context) *Logger {
 	return l
 }
 
-func MustFromContext(c ctx.Context) *Logger {
+func MustFromContext(c ctx.Context) Logger {
 	l, err := FromContext(c)
 	if nil != err {
 		panic(err)
