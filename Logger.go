@@ -15,6 +15,10 @@ func NewLogger(writer Writer) *Logger {
 	}
 }
 
+func (l *Logger) Hijack(defaultSeverity Severity) {
+	NewHijack(l, defaultSeverity).Do()
+}
+
 func (l *Logger) Log(s Severity, m string) {
 	msg := Message{
 		Time:     time.Now(),
