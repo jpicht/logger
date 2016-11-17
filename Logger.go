@@ -1,7 +1,7 @@
 package logger
 
 import (
-	ctx "golang.org/x/net/context"
+	ctx "context"
 )
 
 type Logger interface {

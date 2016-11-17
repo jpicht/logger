@@ -1,7 +1,7 @@
 package logger
 
 import (
-	"golang.org/x/net/context"
+	"context"
 )
 
 func Example_main() {

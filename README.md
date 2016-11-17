@@ -4,7 +4,7 @@ The goal of this little library is to provide a nice and easy to use logger with
 
 In contrast to the build-in "log" module, this library uses a logger instance, that needs to be passed around. Apart from the obvious drawback of needing to pass it around this provides the ability to inject a logger instance with additional information attached.
 
-Support for golang.org/x/net/context is built in.
+Support for context is built in.
 
 Currently you need to instanciate a log encoder, a log writer and the actual logger object
 
@@ -27,9 +27,9 @@ l = logger.NewLogger(lw)
 ### Context
 
 ```go
-import "golang.org/x/net/context"
+import "context"
 
-var context.Context c = logger.NewLogger(...).Context()
+var context.Context c = logger.NewLogger(...).Context(parentContext)
 
 // ...
 
